@@ -22,11 +22,12 @@ class GalleryController extends Controller
         $image = $request->file('photo');
         $title = $request->input('title');
         $name = $image->hashName();
-        $src = $image->storePublicly('uploads', 'public', $name);
+        $return = $image->storePublicly('uploads', 'public', $name);
+        $src = asset("/storage/" . $return);
 
         Image::create([
             'title' => $title,
-            'url' => 'storage/' . $src
+            'url' => $src
         ]);
 
         return redirect()->route('index')->with('success', "Imagem salva com sucesso!");
