@@ -19,6 +19,11 @@ class GalleryController extends Controller
 
     public function upload(Request $request)
     {
+        $request->validate([
+            'title' => ['required', 'max:100'],
+            'photo' => ['required', 'extensions:jpg,png,webp,jpeg']
+        ]);
+        
         $image = $request->file('photo');
         $title = $request->input('title');
         $name = $image->hashName();

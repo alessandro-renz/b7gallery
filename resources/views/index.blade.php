@@ -14,6 +14,15 @@
             <a  href="/" class="logo">B7<span>Gallery</span></a>
             <div class="hero-area">
                 <div class="hero-area-left">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <h1>Envie agora as suas melhores fotografias.</h1>
                     <form method="POST" action="{{route('upload')}}" enctype="multipart/form-data">
                         @csrf
